@@ -1,0 +1,33 @@
+RUDP-Go | Stop-and-Wait vs sliding window
+Working directory: /home/ashman/Documents/vit/cn
+
+$ ./rudp bench --size 65536 --windows 1,32 --losses 0,0.10,0.20 --repeats 3 --rto 10ms --seed 7
+window=1 loss=0.00 repeat=1 verified=true elapsed=0.005262s retransmissions=0
+window=1 loss=0.00 repeat=2 verified=true elapsed=0.005584s retransmissions=0
+window=1 loss=0.00 repeat=3 verified=true elapsed=0.005731s retransmissions=0
+window=32 loss=0.00 repeat=1 verified=true elapsed=0.002947s retransmissions=0
+window=32 loss=0.00 repeat=2 verified=true elapsed=0.002389s retransmissions=0
+window=32 loss=0.00 repeat=3 verified=true elapsed=0.002220s retransmissions=0
+window=1 loss=0.10 repeat=1 verified=true elapsed=0.241697s retransmissions=12
+window=1 loss=0.10 repeat=2 verified=true elapsed=0.361237s retransmissions=18
+window=1 loss=0.10 repeat=3 verified=true elapsed=0.261451s retransmissions=13
+window=32 loss=0.10 repeat=1 verified=true elapsed=0.081035s retransmissions=12
+window=32 loss=0.10 repeat=2 verified=true elapsed=0.061677s retransmissions=18
+window=32 loss=0.10 repeat=3 verified=true elapsed=0.101348s retransmissions=13
+window=1 loss=0.20 repeat=1 verified=true elapsed=0.681308s retransmissions=34
+window=1 loss=0.20 repeat=2 verified=true elapsed=0.660895s retransmissions=33
+window=1 loss=0.20 repeat=3 verified=true elapsed=0.561087s retransmissions=28
+window=32 loss=0.20 repeat=1 verified=true elapsed=0.221265s retransmissions=34
+window=32 loss=0.20 repeat=2 verified=true elapsed=0.181223s retransmissions=33
+window=32 loss=0.20 repeat=3 verified=true elapsed=0.121528s retransmissions=28
+65536 bytes, RTO 10ms, 3 repeats; both endpoints inject loss
+Window	Loss	Median seconds	Median MiB/s	Median retransmissions
+1	0%	0.005584	11.191814	0.0
+32	0%	0.002389	26.160961	0.0
+1	10%	0.261451	0.239051	13.0
+32	10%	0.081035	0.771276	13.0
+1	20%	0.660895	0.094569	33.0
+32	20%	0.181223	0.344878	33.0
+[exit 0]
+
+All commands completed successfully.

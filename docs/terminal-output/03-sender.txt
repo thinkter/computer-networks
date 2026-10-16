@@ -1,0 +1,25 @@
+RUDP-Go | Sender | 10 MiB file and checksum
+Working directory: /home/ashman/Documents/vit/cn
+
+$ dd if=/dev/urandom of=docs/terminal-output/sample.bin bs=1048576 count=10 status=none
+[exit 0]
+
+$ ./rudp send --to 127.0.0.1:9000 --file docs/terminal-output/sample.bin --window 32 --loss 0.20 --seed 7 --rto 10ms --timeout 2m
+Transfer completed
+File: sample.bin (10485760 bytes)
+Window: 32  Outgoing loss: 20%
+Elapsed: 15.855627s  Goodput: 0.630691 MiB/s
+Datagrams attempted: 14036  Simulated drops: 2790
+Original DATA: 8932  Retransmissions: 5102 (DATA: 5102)
+SHA-256: 6b0967ad7c28e642fbf23392f4cb546eb46ef17ae922d3ebbf73bcaa2e01900d  MATCH: true
+[exit 0]
+
+$ sha256sum docs/terminal-output/sample.bin docs/terminal-output/received/sample.bin
+6b0967ad7c28e642fbf23392f4cb546eb46ef17ae922d3ebbf73bcaa2e01900d  docs/terminal-output/sample.bin
+6b0967ad7c28e642fbf23392f4cb546eb46ef17ae922d3ebbf73bcaa2e01900d  docs/terminal-output/received/sample.bin
+[exit 0]
+
+$ cmp docs/terminal-output/sample.bin docs/terminal-output/received/sample.bin
+[exit 0]
+
+All commands completed successfully.

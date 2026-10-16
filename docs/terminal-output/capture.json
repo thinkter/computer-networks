@@ -1,0 +1,270 @@
+{
+  "captured_at_utc": "2026-10-16T03:58:57.436595+00:00",
+  "terminal": "Ghostty",
+  "compositor": "niri",
+  "method": "Direct niri screenshot-window --id capture of newly created project-only terminal windows; original PNG bytes retained. Commands were executed inside those terminals and streamed to their text transcripts.",
+  "working_directory": "/home/ashman/Documents/vit/cn",
+  "all_commands_successful": true,
+  "captures": [
+    {
+      "label": "01-build-tests",
+      "terminal_window_id": 14,
+      "screenshot": "docs/terminal-output/01-build-tests.png",
+      "screenshot_sha256": "145bdd2a4362f6f4e8b7cf8dea6f10c4fbc938508f1f98641fcba9637dec6dc8",
+      "width": 1400,
+      "height": 1020,
+      "transcript": "docs/terminal-output/01-build-tests.txt",
+      "transcript_sha256": "98c6166bf45dc4388fecef70c897c85e322e7799fa06265260f595eea91d32f9",
+      "commands": [
+        {
+          "command": [
+            "go",
+            "version"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.007202891999895655
+        },
+        {
+          "command": [
+            "go",
+            "build",
+            "-o",
+            "rudp",
+            "./cmd/rudp"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.10209455600033834
+        },
+        {
+          "command": [
+            "go",
+            "test",
+            "-count=1",
+            "./..."
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 17.88185148399998
+        },
+        {
+          "command": [
+            "go",
+            "test",
+            "-race",
+            "-count=1",
+            "./..."
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 20.169886789999964
+        },
+        {
+          "command": [
+            "go",
+            "vet",
+            "./..."
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.1291454900001554
+        }
+      ]
+    },
+    {
+      "label": "02-receiver",
+      "terminal_window_id": 15,
+      "screenshot": "docs/terminal-output/02-receiver.png",
+      "screenshot_sha256": "45e4941e361f3eeda152b33cbed70918b1833ddba49cface06039f06b2fe8e56",
+      "width": 1400,
+      "height": 1020,
+      "transcript": "docs/terminal-output/02-receiver.txt",
+      "transcript_sha256": "740dea5289ed257bef159ad469109f8b06d60a1b38652943aad249ab5562d94b",
+      "commands": [
+        {
+          "command": [
+            "./rudp",
+            "receive",
+            "--listen",
+            "127.0.0.1:9000",
+            "--out",
+            "docs/terminal-output/received",
+            "--window",
+            "32",
+            "--loss",
+            "0.20",
+            "--seed",
+            "42",
+            "--idle",
+            "2m",
+            "--timeout",
+            "2m"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 22.560024795999652
+        }
+      ]
+    },
+    {
+      "label": "03-sender",
+      "terminal_window_id": 16,
+      "screenshot": "docs/terminal-output/03-sender.png",
+      "screenshot_sha256": "9ea831408c2d59be3c2c5070f40eefe46f5540a213f7714c810052840e607e32",
+      "width": 1400,
+      "height": 1020,
+      "transcript": "docs/terminal-output/03-sender.txt",
+      "transcript_sha256": "e50ee60bbc2db80d177cb8364abed72ee45d6d9757e762cbcb5755a384b58677",
+      "commands": [
+        {
+          "command": [
+            "dd",
+            "if=/dev/urandom",
+            "of=docs/terminal-output/sample.bin",
+            "bs=1048576",
+            "count=10",
+            "status=none"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.08152023899992855
+        },
+        {
+          "command": [
+            "./rudp",
+            "send",
+            "--to",
+            "127.0.0.1:9000",
+            "--file",
+            "docs/terminal-output/sample.bin",
+            "--window",
+            "32",
+            "--loss",
+            "0.20",
+            "--seed",
+            "7",
+            "--rto",
+            "10ms",
+            "--timeout",
+            "2m"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 15.862550156999987
+        },
+        {
+          "command": [
+            "sha256sum",
+            "docs/terminal-output/sample.bin",
+            "docs/terminal-output/received/sample.bin"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.043096380999941175
+        },
+        {
+          "command": [
+            "cmp",
+            "docs/terminal-output/sample.bin",
+            "docs/terminal-output/received/sample.bin"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.018754264000108378
+        }
+      ]
+    },
+    {
+      "label": "04-benchmark",
+      "terminal_window_id": 17,
+      "screenshot": "docs/terminal-output/04-benchmark.png",
+      "screenshot_sha256": "ec94b334bf04e5401de9dbc4f18b9a045c41e01756eb8544ee7747c82a6d7861",
+      "width": 1400,
+      "height": 1020,
+      "transcript": "docs/terminal-output/04-benchmark.txt",
+      "transcript_sha256": "b84d28655daf54ff8f83c3509a676a640d875b5c77205796939a4a7e662745ae",
+      "commands": [
+        {
+          "command": [
+            "./rudp",
+            "bench",
+            "--size",
+            "65536",
+            "--windows",
+            "1,32",
+            "--losses",
+            "0,0.10,0.20",
+            "--repeats",
+            "3",
+            "--rto",
+            "10ms",
+            "--seed",
+            "7"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 3.941819040000155
+        }
+      ]
+    }
+  ],
+  "transfer": {
+    "bytes": 10485760,
+    "sender_window": 32,
+    "sender_outgoing_loss": 0.2,
+    "receiver_outgoing_loss": 0.2,
+    "sender_rto": "10ms",
+    "sender_seed": 7,
+    "receiver_seed": 42,
+    "source_sha256": "6b0967ad7c28e642fbf23392f4cb546eb46ef17ae922d3ebbf73bcaa2e01900d",
+    "received_sha256": "6b0967ad7c28e642fbf23392f4cb546eb46ef17ae922d3ebbf73bcaa2e01900d",
+    "cmp_exit_code": 0,
+    "receiver_normal_exit": true,
+    "partials_remaining": false
+  },
+  "benchmark": {
+    "bytes": 65536,
+    "rto": "10ms",
+    "repeats": 3,
+    "verified_trials": 18,
+    "summary": [
+      {
+        "window": 1,
+        "loss": 0.0,
+        "median_seconds": 0.005584,
+        "median_goodput_mib_s": 11.191814,
+        "median_retransmissions": 0.0
+      },
+      {
+        "window": 32,
+        "loss": 0.0,
+        "median_seconds": 0.002389,
+        "median_goodput_mib_s": 26.160961,
+        "median_retransmissions": 0.0
+      },
+      {
+        "window": 1,
+        "loss": 0.1,
+        "median_seconds": 0.261451,
+        "median_goodput_mib_s": 0.239051,
+        "median_retransmissions": 13.0
+      },
+      {
+        "window": 32,
+        "loss": 0.1,
+        "median_seconds": 0.081035,
+        "median_goodput_mib_s": 0.771276,
+        "median_retransmissions": 13.0
+      },
+      {
+        "window": 1,
+        "loss": 0.2,
+        "median_seconds": 0.660895,
+        "median_goodput_mib_s": 0.094569,
+        "median_retransmissions": 33.0
+      },
+      {
+        "window": 32,
+        "loss": 0.2,
+        "median_seconds": 0.181223,
+        "median_goodput_mib_s": 0.344878,
+        "median_retransmissions": 33.0
+      }
+    ]
+  },
+  "cleanup": {
+    "evidence_windows_closed": true,
+    "previous_focus_restored": true,
+    "large_generated_fixtures_removed_after_verification": true
+  }
+}

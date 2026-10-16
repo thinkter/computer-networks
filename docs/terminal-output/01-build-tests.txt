@@ -1,0 +1,30 @@
+RUDP-Go | Build and automated checks
+Working directory: /home/ashman/Documents/vit/cn
+
+$ go version
+go version go1.27.1-X:nodwarf5 linux/amd64
+[exit 0]
+
+$ go build -o rudp ./cmd/rudp
+[exit 0]
+
+$ go test -count=1 ./...
+?   	rudp-go/cmd/rudp	[no test files]
+?   	rudp-go/internal/metrics	[no test files]
+ok  	rudp-go/internal/network	0.612s
+ok  	rudp-go/internal/protocol	0.007s
+ok  	rudp-go/internal/transport	17.458s
+[exit 0]
+
+$ go test -race -count=1 ./...
+?   	rudp-go/cmd/rudp	[no test files]
+?   	rudp-go/internal/metrics	[no test files]
+ok  	rudp-go/internal/network	1.632s
+ok  	rudp-go/internal/protocol	1.027s
+ok  	rudp-go/internal/transport	19.556s
+[exit 0]
+
+$ go vet ./...
+[exit 0]
+
+All commands completed successfully.

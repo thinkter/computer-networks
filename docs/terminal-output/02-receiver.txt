@@ -1,0 +1,15 @@
+RUDP-Go | Receiver | 20% ACK loss
+Working directory: /home/ashman/Documents/vit/cn
+
+$ ./rudp receive --listen 127.0.0.1:9000 --out docs/terminal-output/received --window 32 --loss 0.20 --seed 42 --idle 2m --timeout 2m
+Listening on 127.0.0.1:9000; output docs/terminal-output/received
+Transfer completed
+File: sample.bin (10485760 bytes)
+Window: 32  Outgoing loss: 20%
+Elapsed: 15.836959s  Goodput: 0.631434 MiB/s
+Datagrams attempted: 11246  Simulated drops: 2312
+Original DATA: 8932  Retransmissions: 0 (DATA: 0)
+SHA-256: 6b0967ad7c28e642fbf23392f4cb546eb46ef17ae922d3ebbf73bcaa2e01900d  MATCH: true
+[exit 0]
+
+All commands completed successfully.
